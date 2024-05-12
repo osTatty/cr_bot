@@ -3,8 +3,10 @@ from telebot import types
 
 age, height, weight, sex = 0, 0, 0, 0
 calories, fats, proteins, carbohydrates, water = 0.0, 0.0, 0.0, 0.0, 0.0
+medias = []
 
 bot = telebot.TeleBot('6781506875:AAFMn7bxvL4jbQ4x4iVQsilY9Of2RlWeejo') #токен
+
 @bot.message_handler(commands=['start'])
 def start(message):
 
@@ -50,6 +52,8 @@ def get_text_messages(message):
                          '☝🏼 Я подобрал индивидуальный рацион питания, основываясь на потребностях вашего организма в питательных веществах.'
                          '\n\n📋 Можете ознакомиться с несколькими вариантами блюд на каждый прием пищи.', reply_markup=markup)
 
+        bot.register_next_step_handler(message, sendPhoto)
+
     elif message.text == 'Мои данные': #мы
         global sex
         if (sex == 1):
@@ -79,8 +83,6 @@ def get_text_messages(message):
 
         bot.register_next_step_handler(message, counter_CPFC)
 
-
-
 def welcome_user(message):
     text_mes = message.text.split()
     global age, height, weight, sex
@@ -99,6 +101,7 @@ def welcome_user(message):
                      parse_mode="Markdown")
     bot.send_message(message.from_user.id, 'Если данные указаны неверно, снова выберите в меню пункт "Ввести данные"')
 
+@bot.message_handler(content_types=['text'])
 def counter_CPFC(message):
     global calories, fats, proteins, carbohydrates, age, height, weight, sex, water
     if (message.text != 'Назад'):
@@ -146,10 +149,37 @@ def counter_CPFC(message):
                                                f'\n🔥 Калорий: {calories:.2f} кКал\n🍳 Белков: {proteins:.2f} г'
                                                f'\n🥩 Жиров: {fats:.2f} г\n🥞 Углеводов: {carbohydrates:.2f} г'
                                                f'\n💧 Норма воды: {water:.0f} мл')
-        bot.send_message(message.from_user.id, 'Если вы хотите рассчитать КБЖУ для иного варианта работы с весом, нажмите "Назад" и измените свой выбор')  # бот
+        #bot.send_message(message.from_user.id, 'Если вы хотите рассчитать КБЖУ для иного варианта работы с весом, нажмите "Назад" и измените свой выбор')  # бот
+        bot.register_next_step_handler(message, counter_CPFC)
     else:
         get_text_messages(message)
+@bot.message_handler(content_types=['text'])
+def sendPhoto(message):
+    global calories, medias
+    if (message.text != 'Назад'):
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+        if (message.text == 'Завтрак'):
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.from_user.id,'😋 Вот ваш завтрак! Можете выбрать любой вариант, который ближе для вас', reply_markup=markup)
+            medias = [types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1AYduq-4KEbFdkIbaAv6Nw5VeFWHSJ7nf'),
+                      types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1-1KUkNa7Ipv-aAbAroJuwMgB6WMy6M26')]
 
+        if (message.text == 'Обед'):
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.from_user.id,'😋 Вот ваш обед! Можете выбрать любой вариант, который ближе для вас', reply_markup=markup)
+            medias = [types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1IX2N0gr2YrV4e3Dv2Lm9mTYPbJ-Y_Jrx'),
+                      types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1fILF_sgpE3l5W0ljz_hlvIu6VaCLy8Xa')]
+
+        if (message.text == 'Ужин'):
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.from_user.id,'😋 Вот ваш ужин! Можете выбрать любой вариант, который ближе для вас', reply_markup=markup)
+            medias = [types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1EjkRyMF0EzCAKBzTqyuKiSm_uq7iYNyr'),
+                      types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1G5EI_zsjziEXaRZmV-NmOAfGYsfkkVuA')]
+        bot.send_media_group(message.from_user.id, medias)
+        bot.register_next_step_handler(message, sendPhoto)
+
+    else:
+        get_text_messages(message)
 
 def func_check1(message):
     check1 = message.text.split()
