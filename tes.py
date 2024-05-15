@@ -158,23 +158,74 @@ def sendPhoto(message):
     global calories, medias
     if (message.text != 'Назад'):
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+
+        if (calories < 1300 or calories > 3500):
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bot.send_message(message.from_user.id,
+                             '😢 К сожалению, мне не удалось подобрать вам правильный рацион. Проверьте введенные данные и попробуйте снова!', reply_markup=markup)
+            return
+
         if (message.text == 'Завтрак'):
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             bot.send_message(message.from_user.id,'😋 Вот ваш завтрак! Можете выбрать любой вариант, который ближе для вас', reply_markup=markup)
-            medias = [types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1AYduq-4KEbFdkIbaAv6Nw5VeFWHSJ7nf'),
-                      types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1-1KUkNa7Ipv-aAbAroJuwMgB6WMy6M26')]
+
+            if (calories >= 1300 and calories < 1700): #2 и 3
+                medias = [types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1-1KUkNa7Ipv-aAbAroJuwMgB6WMy6M26'),
+                          types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1v75kg5aTBt2O8xt-h6fLZWq6C_cTYKUd')]
+            elif (calories >= 1700 and calories < 2000): #5 и 8
+                medias = [types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1aiRz-zVDRtF09XrHoXEJxugbJjtqdlao'),
+                          types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=112DTqBjlIfPUrxZoTAc5s9YZqAS6H0Ks')]
+            elif (calories >= 2000 and calories < 2300): #9 и 10
+                medias = [types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=15hvZ41AKXeW7AESyAxiDOYyHB-nFN_gk'),
+                          types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1lgCsLm75YXp17hLQ0nnERF7itiEAQkG2')]
+            elif (calories >= 2300 and calories < 2700): #4 и 6
+                medias = [types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1UqRpBMjuwVI_eTYI2yzjjGIABFIpKiLG'),
+                          types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1zDHPkwynftduwuNfKKMwOLShama8CKMf')]
+            elif (calories >= 2700 and calories < 3500): #1 и 7
+                medias = [types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1AYduq-4KEbFdkIbaAv6Nw5VeFWHSJ7nf'),
+                          types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1A0TKNKGlkYvOoTr4_7Kp0vayf6uex7TO')]
+
 
         if (message.text == 'Обед'):
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             bot.send_message(message.from_user.id,'😋 Вот ваш обед! Можете выбрать любой вариант, который ближе для вас', reply_markup=markup)
-            medias = [types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1IX2N0gr2YrV4e3Dv2Lm9mTYPbJ-Y_Jrx'),
-                      types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1fILF_sgpE3l5W0ljz_hlvIu6VaCLy8Xa')]
+
+            if (calories >= 1300 and calories < 1700): #3 и 5
+                medias = [types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1oQ8acZ7exd2SYlYR24nJhyBzPG-eAF-q'),
+                          types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1zXwoekmFZHPzf17kwLTAHWF-YdI2O_yL')]
+            elif (calories >= 1700 and calories < 2000): #4 и 1
+                medias = [types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1KofnjHQf4QktRBnZOCqAy5bbKOLwbqny'),
+                          types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1IX2N0gr2YrV4e3Dv2Lm9mTYPbJ-Y_Jrx')]
+            elif (calories >= 2000 and calories < 2300): #2 и 7
+                medias = [types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1fILF_sgpE3l5W0ljz_hlvIu6VaCLy8Xa'),
+                          types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1VpcrUn_aSMzwQ-dv8nbHsip_SB2s2PML')]
+            elif (calories >= 2300 and calories < 2700): #8 и 10
+                medias = [types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1ZbZNnLLkUSWWXlALNDNOjTd-HYOl2jiX'),
+                          types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1zWlwqPj_wgG2L1lBlKSNsxusal4VvkwP')]
+            elif (calories >= 2700 and calories < 3500): #6 и 9
+                medias = [types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=141KX7S8rCdLYSNNjztEZumZvuV1kNEJv'),
+                          types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1yp0cLgfm_qsDAKWYIeSKb1Fo6KWzZT1T')]
 
         if (message.text == 'Ужин'):
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             bot.send_message(message.from_user.id,'😋 Вот ваш ужин! Можете выбрать любой вариант, который ближе для вас', reply_markup=markup)
-            medias = [types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1EjkRyMF0EzCAKBzTqyuKiSm_uq7iYNyr'),
-                      types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1G5EI_zsjziEXaRZmV-NmOAfGYsfkkVuA')]
+
+            if (calories >= 1300 and calories < 1700): #4 и 6
+                medias = [types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1aZTySp1IY5zfnjmPBhSa7mCCFsLuTEsG'),
+                          types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1an1-P-aW1iWjjFY5FR770LNcP8IVt50R')]
+            elif (calories >= 1700 and calories < 2000): #9 и 2
+                medias = [types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=19fE3jlQddFbuQSmm-ug8X5XOj3kNyDsO'),
+                          types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1qRB8hLNC_xbLkJ4SkVzMAPYyHWcNcAbj')]
+            elif (calories >= 2000 and calories < 2300): #1 и 8
+                medias = [types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1EjkRyMF0EzCAKBzTqyuKiSm_uq7iYNyr'),
+                          types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1zifIdYjcqHiGIWJtBXL3VoZV_PodW6Y8')]
+            elif (calories >= 2300 and calories < 2700): #3 и 5
+                medias = [types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1OTMsdH5iZUOyetjFcDiNT6qbGHB7xLqK'),
+                          types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1kpAfSeEz4om6RZuYF61H8xquOXJYyUzr')]
+            elif (calories >= 2700 and calories < 3500): #7 и 10
+                medias = [types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1G5EI_zsjziEXaRZmV-NmOAfGYsfkkVuA'),
+                          types.InputMediaPhoto('https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1s5jlLeDdLRIUlakyEroZvk_UObJ08tiP')]
+
         bot.send_media_group(message.from_user.id, medias)
         bot.register_next_step_handler(message, sendPhoto)
 
