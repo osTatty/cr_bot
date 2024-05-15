@@ -32,6 +32,11 @@
 <img src="./photo/button3.png" width="80%">
 </p>
 
+```
+import telebot
+from telebot import types
+```
+
 ## Какие модификации планируются в будущем
 
 - График отслеживания варьирования веса
