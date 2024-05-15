@@ -5,7 +5,7 @@ age, height, weight, sex = 0, 0, 0, 0
 calories, fats, proteins, carbohydrates, water = 0.0, 0.0, 0.0, 0.0, 0.0
 medias = []
 
-bot = telebot.TeleBot('6781506875:AAFMn7bxvL4jbQ4x4iVQsilY9Of2RlWeejo') #токен
+bot = telebot.TeleBot('6418032641:AAFv4svh629u9ARQlEkl8T_iDf7_fiuZTNc') #токен
 
 @bot.message_handler(commands=['start'])
 def start(message):
