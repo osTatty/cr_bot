@@ -32,6 +32,10 @@
 <img src="./photo/button3.png" width="80%">
 </p>
 
+## Зависимости проекта
+
+Бот написан при использовании библиотеки telebot
+
 ```
 import telebot
 from telebot import types
