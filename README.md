@@ -17,5 +17,5 @@
 
 Затем появляется меню с четырьмя вариантами автоматическего ввода команд:
 <p align="center">
-<img src="./photo/button1.jpg" width="70%">
+<img src="./photo/button1.png" width="70%">
 </p>
